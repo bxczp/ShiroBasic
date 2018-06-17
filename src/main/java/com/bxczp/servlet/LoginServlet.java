@@ -13,6 +13,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.bxczp.util.CryptographyUtil;
+
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -33,7 +35,10 @@ public class LoginServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        // 不使用加密
+        // UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        // 使用加密
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, CryptographyUtil.md5(password, "java1234"));
         // import org.apache.shiro.session.Session; 引用的是shiro 实现的session
         Session session = subject.getSession();
         try {
