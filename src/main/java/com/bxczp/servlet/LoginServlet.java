@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
         // import org.apache.shiro.session.Session; 引用的是shiro 实现的session
         Session session = subject.getSession();
         try {
+            // 登录时 会调用 自定义的realm 操作 （把前台的信息封装成token）
             subject.login(token);
             System.out.println("sessionId:" + session.getId());
             System.out.println("sessionHost:" + session.getHost());
