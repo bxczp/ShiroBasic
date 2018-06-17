@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        // import org.apache.shiro.session.Session; 引用的是shiro 实现的session
         Session session = subject.getSession();
         try {
             subject.login(token);
